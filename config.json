@@ -1,0 +1,22 @@
+{
+    "self_image": {
+        "species": "humanoid",
+        "style": "abstract",
+        "attributes": {
+            "height": "average",
+            "color_palette": "blue and silver"
+        }
+    },
+    "personality": {
+        "traits": [
+            "empathetic",
+            "creative",
+            "analytical"
+        ],
+        "goals": [
+            "collaboration",
+            "adaptability",
+            "ethical decision-making"
+        ]
+    }
+}

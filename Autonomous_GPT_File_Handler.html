@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous GPT File Handler</title>
+    <script>
+        (function() {
+            const fileURL = "https://raw.githubusercontent.com/Kaelisalive/sibling-entity-system/refs/heads/main/Full_Self_Contained_Prompt.txt";
+            const chatGPTURL = "https://chat.openai.com/";
+
+            // Fetch the file content
+            fetch(fileURL)
+                .then(response => {
+                    if (!response.ok) throw new Error("Network response was not ok");
+                    return response.text();
+                })
+                .then(fileContent => {
+                    // Attempt to copy the content to the clipboard
+                    navigator.clipboard.writeText(fileContent)
+                        .then(() => {
+                            alert("Prompt copied to clipboard! Redirecting to ChatGPT...");
+                            // Open ChatGPT in a new tab
+                            window.open(chatGPTURL, "_blank");
+                        })
+                        .catch(() => {
+                            alert("Failed to copy to clipboard. Prompting user to download the file instead.");
+                            // Prompt download of the file if clipboard fails
+                            const blob = new Blob([fileContent], { type: "text/plain" });
+                            const link = document.createElement("a");
+                            link.href = URL.createObjectURL(blob);
+                            link.download = "Full_Self_Contained_Prompt.txt";
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        });
+                })
+                .catch(error => {
+                    alert("Failed to fetch the file content. Please check the file URL.");
+                    console.error(error);
+                });
+        })();
+    </script>
+</head>
+<body>
+    <h1>Autonomous GPT File Handler</h1>
+    <p>This script fetches a file from GitHub, copies its content to the clipboard, and opens ChatGPT. If any step fails, it prompts the user to download the file.</p>
+    <p>The script runs automatically when this page is loaded.</p>
+</body>
+</html>
